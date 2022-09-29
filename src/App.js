@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Landing from "./Pages/Landing/Landing";
 
 function App() {
+
+  const [password, setPassword] = useState("");
+
+  const inputHandler = (e) => {
+    setPassword(e.target.value)
+    console.log(e.target.value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    <Landing />
+    /* password == "pruebas" ?
+      <Landing />
+      :
+      
+        <div className="text-2xl border-solid	border-black mx-32 my-32	">
+          <input type="text" name="pasword" id="1" placeholder="password" autoFocus onChange={inputHandler}/>
+        </div> */
+  )
+      
 }
 
 export default App;
