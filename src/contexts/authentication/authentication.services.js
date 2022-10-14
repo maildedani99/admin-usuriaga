@@ -10,5 +10,5 @@ export const loadUserFromLocalStorage = () => {
 
 export const saveUserToLocalStorage = (payload) => {
     localStorage.setItem("user", JSON.stringify(payload.user));
-    localStorage.setItem("token", JSON.stringify(payload.access_token));
+    localStorage.setItem("token", JSON.stringify(payload.token));
 };

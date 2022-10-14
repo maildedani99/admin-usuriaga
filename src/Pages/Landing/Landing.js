@@ -1,22 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Navbar from "../../Components/Navbar";
-import RegisterPage from "../RegisterPage/RegisterPage";
 import LoginPage from "../LoginPage/LoginPage";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Routes,
+} from "react-router-dom";
 import NewsPage from "../NewsPage/NewsPage";
-import ProductsView from "../ProductsView/ProductsView";
-import ProductView from "../ProductView/ProductView";
+import { AuthContextProvider } from "../../contexts/authentication/authentication.context";
 
 const Landing = (props) => {
+  /* const PrivateRoute = (props) => {
+    const { state } = React.useContext(AuthContext);
+    const { children, path } = props;
+    return (
+      <Route path={path}>
+        {state.isAuthenticated ? (
+          children
+        ) : (
+          <Redirect to={{ pathname: LOGINPAGE }} />
+        )}
+      </Route>
+    );
+  }; */
+
   return (
-    <Router>
-      <div className="flex flex-col flex-1 w-100	">
-        <Navbar />
-        <LoginPage />
-      
-      </div>
-    </Router>
+    <AuthContextProvider>
+      <Router>
+        <div className="flex flex-col flex-1 w-100	">
+          <Navbar />
+          <Routes>
+            <Route exact path="/" element={<LoginPage />} />
+            <Route exact path="/newsPage" element={<NewsPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthContextProvider>
   );
 };
 

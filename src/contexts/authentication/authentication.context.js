@@ -10,6 +10,7 @@ const initialState = {
 const reducer = (state, action) => {
     switch (action.type) {
         case "LOGIN":
+            console.log(action.payload.user)
             saveUserToLocalStorage(action.payload);
             return {
                 ...state,
