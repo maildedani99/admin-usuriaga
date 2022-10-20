@@ -7,11 +7,10 @@ import { FiShoppingCart, FiUser, FiSearch } from "react-icons/fi";
 import { navLinkStyle, navLinkStyleHover } from "../../astyles/navbarStyles";
 import { Link, NavLink } from "react-router-dom";
 import "./navbar.css";
+import { navbarData } from "./navbarData";
 
 const Navbar = (props) => {
-  const activeStyleLink = {
-    fontSize: "40",
-  };
+ 
 
   return (
     <div className="flex w-full fixed flex-col bg-white -mt-1	">
@@ -34,26 +33,35 @@ const Navbar = (props) => {
       </div> */}
         <div className="flex w-6/12 justify-center  ">
           <div className=" self-center">
-            <NavLink to="/newsPage">
-              <span className="mx-6  cursor-pointer   text-4xl tracking-widest		 ">
-                dashboard
-              </span>
-            </NavLink>
-            <NavLink
-              to="/loginPage"
-              /*   style={({ isActive }) => ({
-                color: isActive ? "#DAC895" : "#000000",
-              })} */
-            >
-              
-            </NavLink>
+          {navbarData.map((item) => (
+              <div className="dropdown ">
+                <NavLink to={item.link} className="navLink hover:font-semibold ">
+                  <span className=" mx-6 uppercase   cursor-pointer  ">
+                    {item.name}
+                  </span>
+                </NavLink>
+                {item.submenu && (
+                  <div className="dropdown-content text-sm">
+                    {item.submenu.map((subitem) => (
+                      <NavLink
+                        className="navLink hover:font-semibold"
+                        to={subitem.link}
+                      >
+                        <span className="uppercase">{subitem.name}</span>
+                        <br />
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
             
            
            
           </div>
         </div>
-        <div className="flex  	align-middle	p-10 justify-center w-3/12 max-w-sm">
-          <span>hola: Lidia</span>
+        <div className="flex  text-3xl	align-middle	p-6 justify-center w-3/12 max-w-sm">
+          <span>Dasboard</span>
         </div>
       </div>
     </div>

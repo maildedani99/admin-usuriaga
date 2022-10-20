@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import ProductCard from '../../Components/ProductCard'
 import { data } from '../../DevAssets/data/data'
 
-const ProductView = ({data}) => {
+const ProductView = ({product}) => {
   return (
     <div>
-      <ProductCard data={data} />
+      <ProductCard product={product} />
     </div>
   )
 }

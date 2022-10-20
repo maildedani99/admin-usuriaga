@@ -10,6 +10,9 @@ import {
 } from "react-router-dom";
 import NewsPage from "../NewsPage/NewsPage";
 import { AuthContextProvider } from "../../contexts/authentication/authentication.context";
+import AddProduct from "../AddProduct/AddProduct";
+import { UploadPhotoProvider } from "../../contexts/uploadphoto_context";
+import ProductInfo from "../ProductInfo/ProductInfo";
 
 const Landing = (props) => {
   /* const PrivateRoute = (props) => {
@@ -28,15 +31,19 @@ const Landing = (props) => {
 
   return (
     <AuthContextProvider>
+      <UploadPhotoProvider>
       <Router>
         <div className="flex flex-col flex-1 w-100	">
           <Navbar />
           <Routes>
-            <Route exact path="/" element={<LoginPage />} />
-            <Route exact path="/newsPage" element={<NewsPage />} />
+            <Route exact path="/" element={<AddProduct />} />
+              <Route exact path="/newsPage" element={<NewsPage />} />
+            <Route exact path="/productInfo" element={<ProductInfo />} />
+              
           </Routes>
         </div>
       </Router>
+                            </UploadPhotoProvider>
     </AuthContextProvider>
   );
 };

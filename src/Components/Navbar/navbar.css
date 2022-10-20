@@ -1,3 +1,8 @@
+.navLink {
+  text-decoration: none;
+  color: #1A171B;
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
