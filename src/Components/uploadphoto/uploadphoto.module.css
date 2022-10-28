@@ -29,7 +29,9 @@
 }
 
 .__contenedorAiPlus {
-    margin: 40px auto auto 0;
+    display: flex;
+    margin-top: 35px;
+    justify-content: center;
 }
 
 .__upload {

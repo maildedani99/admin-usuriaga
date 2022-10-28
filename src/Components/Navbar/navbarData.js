@@ -8,7 +8,7 @@ export const navbarData = [
   {
     id: 2,
     name: "categorias",
-    link: "",
+    link: "/categories",
     submenu: null,
   },
   {

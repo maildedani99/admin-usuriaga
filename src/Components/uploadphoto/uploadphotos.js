@@ -49,7 +49,7 @@ const UploadPhoto = (props) => {
 
                         <div className={styles.__div_foto}>
                             <label className={styles.__label_foto} >
-                                <div className={styles.__contenedorAiPlus}>
+                                <div className={styles.__contenedorAiPlus} >
                                     <AiOutlinePlus fill={'grey'} size={22}/>
                                 </div>
                                 <p className={styles.__upload}>Upload</p>

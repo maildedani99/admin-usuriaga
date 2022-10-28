@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
     >
       <img src={product.images[0].url} alt="foto" />
       <span className=" text-xl mx-auto mt-2">{product.name}</span>
-      <span className=" text-xl mx-auto mt-2 ">{product.price} €</span>
+      <span className=" text-xl mx-auto mt-2 ">{product.price} € {product.category_id}</span>
       <input
         type="button"
         value="Editar Producto  "

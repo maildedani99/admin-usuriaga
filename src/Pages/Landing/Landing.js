@@ -13,6 +13,7 @@ import { AuthContextProvider } from "../../contexts/authentication/authenticatio
 import AddProduct from "../AddProduct/AddProduct";
 import { UploadPhotoProvider } from "../../contexts/uploadphoto_context";
 import ProductInfo from "../ProductInfo/ProductInfo";
+import Categoies from "../Categoies/Categoies";
 
 const Landing = (props) => {
   /* const PrivateRoute = (props) => {
@@ -38,7 +39,9 @@ const Landing = (props) => {
           <Routes>
             <Route exact path="/" element={<AddProduct />} />
               <Route exact path="/newsPage" element={<NewsPage />} />
-            <Route exact path="/productInfo" element={<ProductInfo />} />
+              <Route exact path="/productInfo" element={<ProductInfo />} />
+            <Route exact path="/categories" element={<Categoies />} />
+              
               
           </Routes>
         </div>
