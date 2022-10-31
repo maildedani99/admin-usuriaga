@@ -25,11 +25,7 @@ const AddProduct = (props) => {
     console.log(novelty)
   }
 
-  const formValidator = (body) => {
-     if (body.name || body.description || body.price || body.category_id || body.novelty  === "") {
-            alert("faltan campos por rellenar")
-    } else return
-  }
+  
 
   const submitForm = () => {
     const url = "http://127.0.0.1:8000/api/products/create";
@@ -53,7 +49,6 @@ const AddProduct = (props) => {
       body: JSON.stringify(body),
     };
     console.log(body)
-    formValidator(body)
     fetch(url, options)
       .then((response) => {
         if (response.status === 201) {
