@@ -7,7 +7,7 @@ import useCategories from "../Categoies/useCategories";
 const AddProduct = (props) => {
   //hooks
   const { uploadPhotoArray } = useContext(UploadPhotoContext);
-  const { categories, getCategories } = useCategories();
+  const { categories, getCategories, subCategories, getSubCategories } = useCategories();
   //constants
   const [data, setData] = useState({});
   const [novelty, setNovelty] = useState(false)
@@ -35,6 +35,7 @@ const AddProduct = (props) => {
       description: data.description,
       price: data.price,
       category_id: data.category_id,
+      subcategory_id: data.subcategory_id,
       images: uploadPhotoArray,
       novelty: novelty ?  1 : 0
       
@@ -63,7 +64,11 @@ const AddProduct = (props) => {
 
   useEffect(() => {
     getCategories();
+    getSubCategories();
   }, []);
+  useEffect(() => {
+    console.log(subCategories)
+  }, [subCategories]);
 
   
 
@@ -106,7 +111,7 @@ const AddProduct = (props) => {
               />
             </div>
             <div className="flex flex-1"></div>
-            <div className="flex flex-col mx-auto w-5/12 mt-8">
+            <div className="flex flex-col mx-auto w-5/12 mt-8 ">
               <span>Categoria:</span>
               <select
                 name="category_id"
@@ -117,6 +122,20 @@ const AddProduct = (props) => {
                 {categories &&
                   categories.map((category) => (
                     <option value={category.id}>{category.name}</option>
+                  ))}
+              </select>
+            </div>
+            <div className="flex flex-col mx-auto w-5/12 mt-8">
+              <span>Sub-Categoria:</span>
+              <select
+                name="subcategory_id"
+                className="flex w-100 border  mx-auto p-2 mt-2 border-2 bg-white "
+                onChange={handleInputChange}
+              >
+                <option disabled selected value> Seleciona Sub-Categoria  </option>
+                {subCategories &&
+                  subCategories.map((subCategory) => (
+                    <option value={subCategory.id}>{subCategory.name}</option>
                   ))}
               </select>
             </div>
