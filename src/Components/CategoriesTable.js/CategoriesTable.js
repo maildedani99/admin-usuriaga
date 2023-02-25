@@ -12,23 +12,31 @@ const CategoriesTable = (props) => {
   }, []);
 
   return (
-      <div className="flex flex-col w-2/3 p-3 text-2xl border-2 capitalize">
-        <div className="flex  text-bold mb-4">
-          <div className="flex w-3/12 justify-center">id</div>
-          <div className="flex w-6/12 justify-center">Nombre</div>
-          <div className="flex w-3/12 justify-center text-xl py-1">Eliminar</div>
-        </div>
-        {categories &&
-          categories.map((category) => (
-            <div className="flex  border-t py-1 ">
-              <div className="flex w-3/12 justify-center">  {category.id}</div>
-              <div className="flex w-6/12 justify-center">{category.name}</div>
-              <div className="flex w-3/12 justify-center text-xl py-1">
-                <FiX className="cursor-pointer" size={22} color="#636364" onClick={()=>console.log("coik en eliminar")}/>
-              </div>
+    <div className="flex flex-col w-2/3 p-3 text-2xl border-2 capitalize">
+      {categories &&
+        categories.map((category) => (
+          <div key={category.id} className="flex  border-t py-1 ">
+            <div className="flex w-6/12 ">{category.name}</div>
+            <div className="flex flex-col w-6/12  border-t py-1  ">
+              {category.subcategories.map((subcategory) => (
+                <div className="flex flex-1 ">
+                  <div key={subcategory.id} className="flex w-8/12 text-lg ">
+                    {subcategory.name}
+                  </div>
+                  <div className="flex w-2/12 justify-center text-xl py-1">
+                    <FiX
+                      className="cursor-pointer"
+                      size={18}
+                      color="#636364"
+                      onClick={() => console.log("coik en eliminar")}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-      </div>
+          </div>
+        ))}
+    </div>
   );
 };
 

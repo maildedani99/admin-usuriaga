@@ -34,9 +34,9 @@ const Navbar = (props) => {
         <div className="flex w-6/12 justify-center  ">
           <div className=" self-center">
           {navbarData.map((item) => (
-              <div className="dropdown ">
-                <NavLink to={item.link} className="navLink hover:font-semibold ">
-                  <span className=" mx-6 uppercase   cursor-pointer  ">
+              <div  className="dropdown ">
+                <NavLink  to={item.link} className="navLink hover:font-semibold ">
+                  <span  className=" mx-6 uppercase   cursor-pointer  ">
                     {item.name}
                   </span>
                 </NavLink>

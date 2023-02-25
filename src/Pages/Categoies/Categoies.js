@@ -23,7 +23,7 @@ const Categoies = (props) => {
           <CategoriesTable />
           <div className="flex flex-col flex-1  ">
           <input
-            className="border w-6/6 mx-auto p-4 mt-16 border-2"
+            className=" w-6/6 mx-auto p-4 mt-16 border-2"
             type="text"
             name="name"
             placeholder="Nueva categoria*"
