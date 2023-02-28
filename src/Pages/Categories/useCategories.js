@@ -50,7 +50,7 @@ const useCategories = (props) => {
   };
 
   const deleteCategory = (id) => {
-    const url = "http://127.0.0.1:8000/api/categories/" + id;
+    const url = "http://127.0.0.1:8000/api/categories/delete/" + id;
     const options = {
       method: "POST",
       headers: new Headers(),
@@ -72,7 +72,7 @@ const useCategories = (props) => {
     
     
     
-  const categoryCreate = (data) => {
+  const createCategory = (data) => {
     const url = "http://127.0.0.1:8000/api/categories/create/";
     const body = {
         name: data.name,
@@ -101,7 +101,7 @@ const useCategories = (props) => {
       .catch((error) => console.log(error));
   };
 
-  return { categories, getCategories, subCategories, getSubCategories, setSubCategories, deleteCategory, categoryCreate };
+  return { categories, getCategories, subCategories, getSubCategories, setSubCategories, deleteCategory, createCategory };
 };
 
 useCategories.propTypes = {};

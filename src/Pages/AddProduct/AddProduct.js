@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import UploadPhoto from "../../Components/uploadphoto/uploadphotos";
 import { UploadPhotoContext } from "../../contexts/uploadphoto_context";
-import useCategories from "../Categoies/useCategories";
+import useCategories from "../Categories/useCategories";
 
 const AddProduct = (props) => {
   //hooks
