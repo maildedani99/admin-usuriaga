@@ -33,20 +33,21 @@ const Landing = (props) => {
   return (
     <AuthContextProvider>
       <UploadPhotoProvider>
-      <Router>
-        <div className="flex flex-col flex-1 w-100	">
-          <Navbar />
-          <Routes>
-            <Route exact path="/" element={<AddProduct />} />
+        <Router>
+          <div className="flex flex-col flex-1 w-100	">
+            <Navbar />
+            <Routes>
+            <Route exact path="/" element={<NewsPage />} />
+
+              <Route exact path="/" element={<NewsPage   />} />
+              <Route exact path="/addProduct" element={<AddProduct />} />
               <Route exact path="/newsPage" element={<NewsPage />} />
               <Route exact path="/productInfo" element={<ProductInfo />} />
-            <Route exact path="/categories" element={<Categories />} />
-              
-              
-          </Routes>
-        </div>
-      </Router>
-                            </UploadPhotoProvider>
+              <Route exact path="/categories" element={<Categories />} />
+            </Routes>
+          </div>
+        </Router>
+      </UploadPhotoProvider>
     </AuthContextProvider>
   );
 };

@@ -69,9 +69,7 @@ const useCategories = (props) => {
       })
       .catch((error) => console.log(error));
   };
-    
-    
-    
+        
   const createCategory = (data) => {
     const url = "http://127.0.0.1:8000/api/categories/create/";
     const body = {
@@ -101,7 +99,58 @@ const useCategories = (props) => {
       .catch((error) => console.log(error));
   };
 
-  return { categories, getCategories, subCategories, getSubCategories, setSubCategories, deleteCategory, createCategory };
+  const deleteSubcategory = (id) => {
+    const url = "http://127.0.0.1:8000/api/subcategories/delete/" + id;
+    const options = {
+      method: "POST",
+      headers: new Headers(),
+    };
+
+    fetch(url, options)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        return Promise.reject(response.status);
+      })
+      .then((payload) => {
+        setSubCategories(payload);
+        console.log(categories);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const createSubcategory = (data) => {
+    const url = "http://127.0.0.1:8000/api/subcategories/create/";
+    const body = {
+      name: data.name,
+      category_id: data.category_id
+      };
+  
+      const options = {
+        method: "POST",
+        headers: new Headers({
+          "Content-type": "application/json",
+        }),
+        mode: "cors",
+        body: JSON.stringify(body),
+      };
+
+    fetch(url, options)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        return Promise.reject(response.status);
+      })
+      .then((payload) => {
+        setSubCategories(payload);
+        console.log(categories);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  return { categories, getCategories, subCategories, getSubCategories, setSubCategories, deleteCategory, createCategory, deleteSubcategory, createSubcategory };
 };
 
 useCategories.propTypes = {};

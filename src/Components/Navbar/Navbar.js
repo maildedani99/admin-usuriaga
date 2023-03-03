@@ -34,7 +34,7 @@ const Navbar = (props) => {
         <div className="flex w-6/12 justify-center  ">
           <div className=" self-center">
           {navbarData.map((item) => (
-              <div  className="dropdown ">
+              <div key={item.id}  className="dropdown ">
                 <NavLink  to={item.link} className="navLink hover:font-semibold ">
                   <span  className=" mx-6 uppercase   cursor-pointer  ">
                     {item.name}
@@ -44,6 +44,7 @@ const Navbar = (props) => {
                   <div className="dropdown-content text-sm">
                     {item.submenu.map((subitem) => (
                       <NavLink
+                        key={subitem.id}
                         className="navLink hover:font-semibold"
                         to={subitem.link}
                       >

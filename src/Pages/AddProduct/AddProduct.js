@@ -33,12 +33,11 @@ const AddProduct = (props) => {
       name: data.name,
       description: data.description,
       price: data.price,
-      category_id: data.category_id,
       subcategory_id: data.subcategory_id,
       images: uploadPhotoArray,
       novelty: novelty ? 1 : 0,
     };
-
+    console.log(body)
     const options = {
       method: "POST",
       headers: new Headers({
@@ -103,20 +102,13 @@ const AddProduct = (props) => {
               <div className="flex flex-col ">
                 <div className="flex flex-1">
                   <div className="flex flex-col mx-auto w-5/12  ">
-                    <span>Categoria:</span>
-                    <select
-                      name="category_id"
-                      className="flex w-100   mx-auto p-2 mt-2 border-2 bg-white "
+                    <span>Precio:</span>
+                    <input
+                      className=" w-100 mt-2 mx-auto p-2   border-2"
+                      type="text"
+                      name="price"
                       onChange={handleInputChange}
-                    >
-                      <option disabled selected value>
-                        {" "}
-                      </option>
-                      {categories &&
-                        categories.map((category) => (
-                          <option value={category.id}>{category.name}</option>
-                        ))}
-                    </select>
+                    />
                   </div>
                   <div className="flex flex-col mx-auto w-5/12 ">
                     <span>Sub-Categoria:</span>
@@ -137,17 +129,19 @@ const AddProduct = (props) => {
                     </select>
                   </div>
                 </div>
-                <div className="flex w-5/12 mt-8 flex-col ml-6  ">
-                  <span>Precio:</span>
-                  <input
-                    className=" w-100 mt-2 mx-auto p-2   border-2"
-                    type="text"
-                    name="price"
-                    onChange={handleInputChange}
-                  />
+
+                <div className="flex mt-2    ">
+                  <div className="flex flex-col  mt-4 ">
+                    <span className="ml-4">Agregar imagenes:</span>
+                    <div className="flex flex-wrap  ">
+                      <UploadPhoto name="image1" num={uploadPhotoArray[0]} />
+                      <UploadPhoto name="image2" num={uploadPhotoArray[1]} />
+                      <UploadPhoto name="image3" num={uploadPhotoArray[2]} />
+                      
+                    </div>
+                  </div>
                 </div>
-                <div className="flex mt-16  ml-6  ">
-                  <div className="flex flex-1  justify-start	    ">
+                <div className="flex flex-1 mt-4 ml-2 justify-start	    ">
                     <input
                       className="w-10 justify-self-start	"
                       type="checkbox"
@@ -156,19 +150,10 @@ const AddProduct = (props) => {
                     />
                     <span className="ml-2">Añadir a Novedades</span>
                   </div>
-                </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-col  mt-4 mx-auto ">
-            <span className="ml-4">Agregar imagenes:</span>
-            <div className="flex flex-wrap  ">
-              <UploadPhoto name="image1" num={uploadPhotoArray[0]} />
-              <UploadPhoto name="image2" num={uploadPhotoArray[1]} />
-              <UploadPhoto name="image3" num={uploadPhotoArray[2]} />
-              <UploadPhoto name="image4" num={uploadPhotoArray[3]} />
-            </div>
-          </div>
+          
         </div>
       </div>
 

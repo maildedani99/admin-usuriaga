@@ -5,33 +5,29 @@ import CategoriesTable from "../../Components/CategoriesTable.js/CategoriesTable
 import CategoryCard from "../../Components/CategoryCard";
 
 const Categories = (props) => {
-  const {  categories, getCategories, createCategory } = useCategories();
+  const { categories, getCategories, createCategory } = useCategories();
 
   const [data, setData] = useState({});
-
-
+  const [categoriesObj, setCategoriesObj] = useState([''])
 
   const onCreateCategory = (data) => {
-     createCategory(data);
+    createCategory(data);
   };
 
-  const prueba = () => {
-   
-  }
+  const prueba = () => {};
 
   const handleInputChange = (event) => {
     setData({
       ...data,
       [event.target.name]: event.target.value,
     });
+    console.log(data)
   };
 
-
   useEffect(() => {
-      getCategories();
-  }, []);
-
- 
+       getCategories();
+    }
+, []);
 
   return (
     <div className="flex flex-col flex-1 mt-32 ">
@@ -56,7 +52,7 @@ const Categories = (props) => {
       </div>
       <div className="flex flex-wrap w-10/12 mx-auto   mt-16      ">
         {categories.map((category) => (
-          <div className="flex flex-1 p-4  m-2">
+          <div key={category.id} className="flex flex-1 p-4  m-2">
             <CategoryCard category={category} />
           </div>
         ))}

@@ -2,8 +2,19 @@ export const navbarData = [
   {
     id: 1,
     name: "productos",
-    link: "/newsPage",
-    submenu: null,
+    link: null,
+    submenu: [
+      {
+        id: 1,
+        name: "Ver productos",
+        link: "newsPage",
+      },
+      {
+        id: 2,
+        name: "Añadir nuevo",
+        link: "addProduct",
+      },
+    ],
   },
   {
     id: 2,
@@ -13,30 +24,8 @@ export const navbarData = [
   },
   {
     id: 3,
-    name: "accesorios",
+    name: "tallas",
     link: "",
-    submenu: [
-      {
-        id: 6,
-        name: "zapatos",
-        link: "",
-      },
-      {
-        id: 7,
-        name: "bolsos",
-        link: "",
-      },
-      {
-        id: 8,
-        name: "colgantes",
-        link: "",
-      },
-      {
-        id: 9,
-        name: "pendientes",
-        link: "",
-      },
-    ],
   },
   {
     id: 4,
