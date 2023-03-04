@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { CONECTION_API } from "../routes/routes";
 
 const useCategories = (props) => {
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
 
   const getCategories = () => {
-    const url = "http://127.0.0.1:8000/api/categories/all";
+    const url = CONECTION_API + 'categories/all';
     const options = {
       method: "GET",
       headers: new Headers(),
@@ -22,14 +23,13 @@ const useCategories = (props) => {
       })
       .then((payload) => {
         setCategories(payload);
-        console.log(categories);
       })
       .catch((error) => console.log(error));
   };
 
 
   const getSubCategories = () => {
-    const url = "http://127.0.0.1:8000/api/subcategories/all";
+    const url = CONECTION_API + 'subcategories/all';
     const options = {
       method: "GET",
       headers: new Headers(),
@@ -44,7 +44,6 @@ const useCategories = (props) => {
       })
       .then((payload) => {
         setSubCategories(payload);
-        console.log(subCategories);
       })
       .catch((error) => console.log(error));
   };
@@ -71,7 +70,7 @@ const useCategories = (props) => {
   };
         
   const createCategory = (data) => {
-    const url = "http://127.0.0.1:8000/api/categories/create/";
+    const url = CONECTION_API + 'categories/create';
     const body = {
         name: data.name,
       };
@@ -94,13 +93,12 @@ const useCategories = (props) => {
       })
       .then((payload) => {
         setCategories(payload);
-        console.log(categories);
       })
       .catch((error) => console.log(error));
   };
 
   const deleteSubcategory = (id) => {
-    const url = "http://127.0.0.1:8000/api/subcategories/delete/" + id;
+    const url = CONECTION_API + 'subcategories/delete' + id;
     const options = {
       method: "POST",
       headers: new Headers(),
@@ -115,13 +113,12 @@ const useCategories = (props) => {
       })
       .then((payload) => {
         setSubCategories(payload);
-        console.log(categories);
       })
       .catch((error) => console.log(error));
   };
 
   const createSubcategory = (data) => {
-    const url = "http://127.0.0.1:8000/api/subcategories/create/";
+    const url = CONECTION_API + 'subcategories/create';
     const body = {
       name: data.name,
       category_id: data.category_id
@@ -145,7 +142,6 @@ const useCategories = (props) => {
       })
       .then((payload) => {
         setSubCategories(payload);
-        console.log(categories);
       })
       .catch((error) => console.log(error));
   };

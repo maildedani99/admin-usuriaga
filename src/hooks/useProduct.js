@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const useProduct = ({ data, uploadPhotoArray }) => {
 
   const getCategories = () => {
-    const url = 'http://127.0.0.1:8000/api/categories/all';
+    const url = CONECTION_API + 'categories/all';
     const options = {
       method: 'GET',
       headers: new Headers(),
@@ -29,7 +29,7 @@ const useProduct = ({ data, uploadPhotoArray }) => {
   
 
   const submitForm = () => {
-    const url = "http://127.0.0.1:8000/api/products/create";
+    const url = CONECTION_API + 'products/create';
     console.log(data);
     const body = {
       name: data.name,

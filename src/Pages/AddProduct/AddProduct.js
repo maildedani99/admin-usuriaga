@@ -2,17 +2,24 @@ import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import UploadPhoto from "../../Components/uploadphoto/uploadphotos";
 import { UploadPhotoContext } from "../../contexts/uploadphoto_context";
-import useCategories from "../Categories/useCategories";
+import useCategories from "../../hooks/useCategories";
+import { CONECTION_API } from "../../routes/routes";
+import useSizes from "../../hooks/useSizes";
 
 const AddProduct = (props) => {
   //hooks
   const { uploadPhotoArray } = useContext(UploadPhotoContext);
-  const { categories, getCategories, subCategories, getSubCategories } =
-    useCategories();
+  const { getCategories, subCategories, getSubCategories } = useCategories();
+  const { getSizes, sizes } = useSizes();
   //constants
   const [data, setData] = useState({});
-  const [novelty, setNovelty] = useState(false);
+  const [novelty, setNovelty] = useState(true);
+  const [sizesList, setSizesList] = useState([]);
+  const [checkedList, setCheckList] = useState({});
   //
+  var checkedListArray = []
+  //
+
   const handleInputChange = (event) => {
     setData({
       ...data,
@@ -21,13 +28,31 @@ const AddProduct = (props) => {
     console.log(data);
   };
 
-  const handleCheckbox = (event) => {
-    setNovelty(!novelty);
-    console.log(novelty);
+  const handleNoveltyCheckbox = (event) => {
+    setNovelty(event);
   };
 
+  const handleSizesCheckbox = (event) => {
+    setCheckList({
+      ...checkedList,
+      [event.target.id]: event.target.checked,
+  })
+  };
+  const selectTrue = () => {
+    for (const property in checkedList) {
+        if (checkedList[property] === true) {
+            checkedListArray.push(property)
+        }
+    }
+    setData({
+        ...data,
+        features: checkedListArray,
+    })
+}
+
   const submitForm = () => {
-    const url = "http://127.0.0.1:8000/api/products/create";
+    selectTrue();
+    const url = CONECTION_API + "products/create";
 
     const body = {
       name: data.name,
@@ -36,8 +61,9 @@ const AddProduct = (props) => {
       subcategory_id: data.subcategory_id,
       images: uploadPhotoArray,
       novelty: novelty ? 1 : 0,
+      sizes: checkedListArray
     };
-    console.log(body)
+    console.log(body);
     const options = {
       method: "POST",
       headers: new Headers({
@@ -60,12 +86,9 @@ const AddProduct = (props) => {
   };
 
   useEffect(() => {
-    getCategories();
     getSubCategories();
+    getSizes();
   }, []);
-  useEffect(() => {
-    console.log(subCategories);
-  }, [subCategories]);
 
   return (
     <div className="flex flex-col flex-1 mt-32 ">
@@ -116,14 +139,13 @@ const AddProduct = (props) => {
                       name="subcategory_id"
                       className="flex w-100   mx-auto p-2 mt-2 border-2 bg-white "
                       onChange={handleInputChange}
+                      defaultValue={" "}
                     >
-                      <option disabled selected value>
-                        {" "}
-                      </option>
+                      <option value={" "} disabled></option>
                       {subCategories &&
-                        subCategories.map((subCategory) => (
-                          <option value={subCategory.id}>
-                            {subCategory.name}
+                        subCategories.map((subcategory) => (
+                          <option key={subcategory.id} value={subcategory.id}>
+                            {subcategory.name}
                           </option>
                         ))}
                     </select>
@@ -137,23 +159,42 @@ const AddProduct = (props) => {
                       <UploadPhoto name="image1" num={uploadPhotoArray[0]} />
                       <UploadPhoto name="image2" num={uploadPhotoArray[1]} />
                       <UploadPhoto name="image3" num={uploadPhotoArray[2]} />
-                      
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-1 mt-4 ml-2 justify-start	    ">
-                    <input
-                      className="w-10 justify-self-start	"
-                      type="checkbox"
-                      value={novelty}
-                      onChange={handleCheckbox}
-                    />
-                    <span className="ml-2">Añadir a Novedades</span>
-                  </div>
+                  <input
+                    className="w-10 justify-self-start	"
+                    name="novelty"
+                    type="checkbox"
+                    value={novelty}
+                    onChange={(e) => handleNoveltyCheckbox(e.target.checked)}
+                    defaultChecked={true}
+                  />
+                  <span className="ml-2">Añadir a Novedades</span>
+                </div>
               </div>
             </div>
           </div>
-          
+          <div className="flex flex-col flex-wrap mt-4 ml-2 justify-start	    ">
+            <span className="ml-4">Tallas:</span>
+            {sizes &&
+              sizes.map((size) => (
+                <div key={size.id} className="flex flex-row flex-1">
+                  <input
+                    className="w-5 justify-self-start 	"
+                    id={size.id}
+                    
+                    name={size.name}
+                    type="checkbox"
+                    value={novelty}
+                    onChange={(e) => handleSizesCheckbox(e)}
+                    //defaultChecked={false}
+                  />
+                  <span className="ml-2">{size.name}</span>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
 

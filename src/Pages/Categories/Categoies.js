@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import useCategories from "./useCategories";
+import useCategories from "../../hooks/useCategories";
 import CategoriesTable from "../../Components/CategoriesTable.js/CategoriesTable";
 import CategoryCard from "../../Components/CategoryCard";
 

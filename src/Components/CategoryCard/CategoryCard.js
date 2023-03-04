@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import useCategories from "../../Pages/Categories/useCategories";
+import useCategories from "../../hooks/useCategories";
 
 const CategoryCard = ({ category }) => {
   const { deleteSubcategory, deleteCategory, createSubcategory } =

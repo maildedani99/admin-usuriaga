@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
-import useCategories from "../../Pages/Categories/useCategories";
+import useCategories from "../../hooks/useCategories";
 import { FiX } from "react-icons/fi";
 
 const CategoriesTable = (props) => {
