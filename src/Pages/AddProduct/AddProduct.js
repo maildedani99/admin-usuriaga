@@ -14,10 +14,12 @@ const AddProduct = (props) => {
   //constants
   const [data, setData] = useState({});
   const [novelty, setNovelty] = useState(true);
-  const [sizesList, setSizesList] = useState([]);
+  const [outlet, setOutlet] = useState(false);
+  const [discount, setDiscount] = useState(false);
+
   const [checkedList, setCheckList] = useState({});
   //
-  var checkedListArray = []
+  var checkedListArray = [];
   //
 
   const handleInputChange = (event) => {
@@ -32,23 +34,33 @@ const AddProduct = (props) => {
     setNovelty(event);
   };
 
+  const handleOutletCheckbox = (event) => {
+    console.log(event)
+    setOutlet(event);
+  };
+
+  const handleDiscountCheckbox = (event) => {
+    console.log(event)
+    setDiscount(event);
+  };
+
   const handleSizesCheckbox = (event) => {
     setCheckList({
       ...checkedList,
       [event.target.id]: event.target.checked,
-  })
+    });
   };
   const selectTrue = () => {
     for (const property in checkedList) {
-        if (checkedList[property] === true) {
-            checkedListArray.push(property)
-        }
+      if (checkedList[property] === true) {
+        checkedListArray.push(property);
+      }
     }
     setData({
-        ...data,
-        features: checkedListArray,
-    })
-}
+      ...data,
+      features: checkedListArray,
+    });
+  };
 
   const submitForm = () => {
     selectTrue();
@@ -61,7 +73,10 @@ const AddProduct = (props) => {
       subcategory_id: data.subcategory_id,
       images: uploadPhotoArray,
       novelty: novelty ? 1 : 0,
-      sizes: checkedListArray
+      sizes: checkedListArray,
+      outlet: true,
+      discount: true,
+      reduced_price: 25,
     };
     console.log(body);
     const options = {
@@ -173,6 +188,38 @@ const AddProduct = (props) => {
                   />
                   <span className="ml-2">Añadir a Novedades</span>
                 </div>
+                <div className="flex flex-1 mt-4 ml-2 justify-start	    ">
+                  <input
+                    className="w-10 justify-self-start	"
+                    name="outlet"
+                    type="checkbox"
+                    value={outlet}
+                    onChange={(e) => handleOutletCheckbox(e.target.checked)}
+                    defaultChecked={false}
+                  />
+                  <span className="ml-2">Añadir al Outlet</span>
+                </div>
+                <div className="flex flex-1 mt-4 ml-2 justify-start	    ">
+                  <input
+                    className="w-10 justify-self-start	"
+                    name="discount"
+                    type="checkbox"
+                    value={discount}
+                    onChange={(e) => handleDiscountCheckbox(e.target.checked)}
+                    defaultChecked={false}
+                  />
+                  <span className="ml-2">Añadir a Rebajas</span>
+                </div>
+                <div className="flex flex-col mx-auto w-5/12  ">
+                  <span>Precio rebajado:</span>
+                  <input
+                    className=" w-100 mt-2 mx-auto p-2   border-2"
+                    type="text"
+                    name="reduced_price"
+                    defaultValue={0}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -184,7 +231,6 @@ const AddProduct = (props) => {
                   <input
                     className="w-5 justify-self-start 	"
                     id={size.id}
-                    
                     name={size.name}
                     type="checkbox"
                     value={novelty}

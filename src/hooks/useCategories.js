@@ -98,7 +98,7 @@ const useCategories = (props) => {
   };
 
   const deleteSubcategory = (id) => {
-    const url = CONECTION_API + 'subcategories/delete' + id;
+    const url = CONECTION_API + 'subcategories/delete/' + id;
     const options = {
       method: "POST",
       headers: new Headers(),
