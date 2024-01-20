@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
       className="flex flex-col w-3/12 p-2 justify-center cursor-pointer mt-8"
       onClick={handleClick}
     >
-      <img src={product.images[0].url} alt="foto" />
+      <img src={product.images[0].url ? product.images[0].url : <span>fallo</span> } alt="foto" />
       <span className=" text-xl mx-auto mt-2">{product.name}</span>
       <span className=" text-xl mx-auto mt-2 ">{product.price} € {product.category_id}</span>
       <input

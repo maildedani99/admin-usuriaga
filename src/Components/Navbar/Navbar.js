@@ -62,7 +62,7 @@ const Navbar = (props) => {
           </div>
         </div>
         <div className="flex  text-3xl	align-middle	p-6 justify-center w-3/12 max-w-sm">
-          <span>Dasboard</span>
+          <span>Dashboard</span>
         </div>
       </div>
     </div>

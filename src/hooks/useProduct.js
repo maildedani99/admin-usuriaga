@@ -1,67 +1,49 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { CONECTION_API } from '../routes/routes';
 
-const useProduct = ({ data, uploadPhotoArray }) => {
+const useProduct = (props) => {
 
-  const getCategories = () => {
-    const url = CONECTION_API + 'categories/all';
-    const options = {
-      method: 'GET',
-      headers: new Headers(),
-    };
+  const createProduct = async (data, checkedListArray, uploadPhotoArray) => {
+  const url = CONECTION_API + "products/create";
 
-    fetch(url, options)
-      .then(response => {
-        if (response.status === 200) {
-          return response.json();
-        }
-        return Promise.reject(response.status);
-      }
-      )
-      .then(payload => {
-        console.log("All products");
-        setProducts(payload);
-      }
-      )
-      .catch(error => console.log(error));
+  const body = {
+    name: data.name,
+    description: data.description,
+    price: data.price,
+    subcategory_id: data.subcategory_id,
+    images: uploadPhotoArray,
+    novelty: data.novelty ? data.novelty : true,
+    sizes: checkedListArray,
+    outlet: data.outlet ? data.outlet : false,
+    discount: data.discount ? data.discount : false,
+    reduced_price: data.reduced_price ? data.reduced_price : 0,
   };
-}
-  
-
-  const submitForm = () => {
-    const url = CONECTION_API + 'products/create';
-    console.log(data);
-    const body = {
-      name: data.name,
-      description: data.description,
-      price: data.price,
-      category_id: data.category,
-      images: uploadPhotoArray,
-    };
-    console.log(body);
-
-    const options = {
-      method: "POST",
-      headers: new Headers({
-        "Content-type": "application/json",
-      }),
-      mode: "cors",
-      body: JSON.stringify(body),
-    };
-    fetch(url, options)
-      .then((response) => {
-        if (response.status === 201) {
-          console.log(response.status);
-          return response.json();
-        } else {
-          return Promise.reject(response.status);
-        }
-      })
-      .catch((error) => console.log(error));
+  console.log(body);
+  const options = {
+    method: "POST",
+    headers: new Headers({
+      "Content-type": "application/json",
+    }),
+    mode: "cors",
+    body: JSON.stringify(body),
   };
+  try {
+    const response = await fetch(url, options);
+    const payload = await response.json();
+    if (response.ok) {
+      console.log(payload);
+      return payload;
+    } else {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   
-  return [submitForm]
+  return {createProduct}
   
   
 }

@@ -5,10 +5,12 @@ import CategoriesTable from "../../Components/CategoriesTable.js/CategoriesTable
 import CategoryCard from "../../Components/CategoryCard";
 
 const Categories = (props) => {
-  const { categories, getCategories, createCategory } = useCategories();
+  const { getCategories, createCategory } = useCategories();
 
   const [data, setData] = useState({});
-  const [categoriesObj, setCategoriesObj] = useState([''])
+  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const onCreateCategory = (data) => {
     createCategory(data);
@@ -21,17 +23,30 @@ const Categories = (props) => {
       ...data,
       [event.target.name]: event.target.value,
     });
-    console.log(data)
+    console.log(data);
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await getCategories();
+      setCategories(response);
+    } catch (error) {
+      setError(true);
+    }
   };
 
   useEffect(() => {
-       getCategories();
-    }
-, []);
+    fetchData();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line
+  }, [refresh]);
 
   return (
     <div className="flex flex-col flex-1 mt-32 ">
-      <input type="button" value="prueba" onClick={prueba} />
       <div className="flex flex-1  text-3xl justify-center   ">
         <span className="	">Categorias</span>
       </div>
@@ -44,18 +59,19 @@ const Categories = (props) => {
           onChange={handleInputChange}
         />
         <input
-          onClick={() => onCreateCategory(data)}
+          onClick={() => createCategory(data)}
           className="  text-white   text-center  cursor-pointer ml-2"
           defaultValue="Añadir"
           style={{ backgroundColor: "#dac895" }}
         />
       </div>
       <div className="flex flex-wrap w-10/12 mx-auto   mt-16      ">
-        {categories.map((category) => (
-          <div key={category.id} className="flex flex-1 p-4  m-2">
-            <CategoryCard category={category} />
-          </div>
-        ))}
+        {categories &&
+          categories.map((category) => (
+            <div key={category.id} className="flex flex-1 p-4  m-2">
+              <CategoryCard category={category} />
+            </div>
+          ))}
       </div>
     </div>
   );
